@@ -5,6 +5,10 @@ import darknet
 import argparse
 
 #Cargar red
+weights_red_path="redes/yolov7-tiny.weights"
+cfg_red_path="./redes/yolov7-tiny.cfg"
+red_thresh=.35
+
 def parser():
     parser = argparse.ArgumentParser(description="YOLO Object Detection")
     parser.add_argument("--input", type=str, default="",
@@ -14,7 +18,7 @@ def parser():
                         "If no input is given, ")
     parser.add_argument("--batch_size", default=1, type=int,
                         help="number of images to be processed at the same time")
-    parser.add_argument("--weights", default="redes/yolov4-tiny.weights",
+    parser.add_argument("--weights", default=weights_red_path,
                         help="yolo weights path")
     parser.add_argument("--dont_show", action='store_true',
                         help="windown inference display. For headless systems")
@@ -22,15 +26,16 @@ def parser():
                         help="display bbox coordinates of detected objects")
     parser.add_argument("--save_labels", action='store_true',
                         help="save detections bbox for each image in yolo format")
-    parser.add_argument("--config_file", default="./redes/yolov4-tiny.cfg",
+    parser.add_argument("--config_file", default=cfg_red_path,
                         help="path to config file")
     parser.add_argument("--data_file", default="./cfg/coco.data",
                         help="path to data file")
-    parser.add_argument("--thresh", type=float, default=.25,
+    parser.add_argument("--thresh", type=float, default=red_thresh,
                         help="remove detections with lower confidence")
     return parser.parse_args()
 
 args = parser()
+print("Configuracion de red:")
 print(args)
 
 #Cargar red
@@ -43,11 +48,8 @@ network, class_names, class_colors = darknet.load_network(
     )
 
 #Empezar video
-color_borde=[150,30,30]
-color_letra=[0,100,100]
-cap = cv2.VideoCapture(0)
-
 print('Grabando Camara...')
+cap = cv2.VideoCapture(0)
 
 while cap:
     ret, image = cap.read()
@@ -64,9 +66,6 @@ while cap:
                                 interpolation=cv2.INTER_LINEAR)
 
     darknet.copy_image_from_bytes(darknet_image, image_resized.tobytes())
-    
-    #bgr to rgb
-    #frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
 
     #Detectar
     darknet.copy_image_from_bytes(darknet_image, image_resized.tobytes())
