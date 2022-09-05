@@ -31,6 +31,7 @@ You will need to press y twice.
 The script installs the binary to /opt/cmake-3.*your_version* so in order to get the cmake command, make a symbolic link:
 
 sudo ln -s /opt/cmake-3.*your_version*/bin/* /usr/local/bin
+
 Test your results with:
 
 cmake --version
