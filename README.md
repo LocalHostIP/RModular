@@ -1,10 +1,10 @@
 # RModular
 Robot manipulador
 
-#Epa
+# Apuntes
 1234
 
-#Instalar darknet
+# Instalar darknet
 
 git clone https://github.com/AlexeyAB/darknet
 
