@@ -17,3 +17,13 @@ cd build_release
 cmake ..
 cmake --build . --target install --parallel 8
 
+# Links
+Usar cualquier versión de YOLO con Darknet
+
+cfgs
+https://github.com/AlexeyAB/darknet/tree/master/cfg
+
+Pesos
+https://github.com/AlexeyAB/darknet/releases/tag/yolov4
+
+
