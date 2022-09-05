@@ -17,6 +17,11 @@ cd build_release
 cmake ..
 cmake --build . --target install --parallel 8
 
+## reinstalar cmake
+sudo apt remove cmake
+
+Visit https://cmake.org/download/ and download the latest bash script.
+
 # Links
 Usar cualquier versión de YOLO con Darknet
 
